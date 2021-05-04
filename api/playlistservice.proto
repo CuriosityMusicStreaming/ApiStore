@@ -45,7 +45,7 @@ service PlayListService {
 
 message CreatePlaylistRequest {
     string name = 1;
-    string userID = 2;
+    string userToken = 2;
 }
 
 message CreatePlaylistResponse {
@@ -54,7 +54,7 @@ message CreatePlaylistResponse {
 
 message AddToPlaylistRequest {
     string playlistID = 1;
-    string userID = 2;
+    string userToken = 2;
     string contentID = 3;
 }
 
@@ -64,12 +64,12 @@ message AddToPlaylistResponse {
 
 message RemoveFromPlaylistRequest {
     string playlistItemID = 1;
-    string userID = 2;
+    string userToken = 2;
 }
 
 message RemovePlaylistRequest {
     string playlistID = 1;
-    string userID = 2;
+    string userToken = 2;
 }
 
 message GetPlaylistRequest {
