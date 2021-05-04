@@ -1,0 +1,90 @@
+syntax = "proto3";
+package playlistservice;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = ".;playlistservice";
+
+service PlayListService {
+    rpc CreatePlaylist (CreatePlaylistRequest) returns (CreatePlaylistResponse) {
+        option (google.api.http) = {
+            post: "/api/ps/v1/create-playlist"
+            body: "*"
+        };
+    }
+
+    rpc AddToPlaylist (AddToPlaylistRequest) returns (AddToPlaylistResponse) {
+        option (google.api.http) = {
+            post: "/api/ps/v1/add-content-to-playlist"
+            body: "*"
+        };
+    }
+
+    rpc RemoveFromPlaylist (RemoveFromPlaylistRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/api/ps/v1/remove-from-playlist"
+            body: "*"
+        };
+    }
+
+    rpc RemovePlaylist (RemovePlaylistRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/api/ps/v1/remove-playlist"
+            body: "*"
+        };
+    }
+
+    rpc GetPlaylist (GetPlaylistRequest) returns (GetPlaylistResponse) {
+        option (google.api.http) = {
+            post: "/api/ps/v1/add-content"
+            body: "*"
+        };
+    }
+}
+
+message CreatePlaylistRequest {
+    string name = 1;
+    string userID = 2;
+}
+
+message CreatePlaylistResponse {
+    string playlistID = 1;
+}
+
+message AddToPlaylistRequest {
+    string playlistID = 1;
+    string userID = 2;
+    string contentID = 3;
+}
+
+message AddToPlaylistResponse {
+    string playlistItemID = 1;
+}
+
+message RemoveFromPlaylistRequest {
+    string playlistItemID = 1;
+    string userID = 2;
+}
+
+message RemovePlaylistRequest {
+    string playlistID = 1;
+    string userID = 2;
+}
+
+message GetPlaylistRequest {
+    string playlistID = 1;
+}
+
+message GetPlaylistResponse {
+    string name = 1;
+    string authorID = 2;
+    uint64 createdAtTimestamp = 3;
+    uint64 updatedAtTimestamp = 4;
+    repeated PlaylistItem playlistItems = 5;
+}
+
+message PlaylistItem {
+    string id = 1;
+    string contentID = 2;
+}
