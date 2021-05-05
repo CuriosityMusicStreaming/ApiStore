@@ -26,6 +26,27 @@ service ApiGateway {
             body: "*"
         };
     }
+
+    rpc CreatePlaylist (CreatePlaylistRequest) returns (CreatePlaylistResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/create-playlist"
+            body: "*"
+        };
+    }
+
+    rpc GetUserPlaylists (GetUserPlaylistsRequest) returns (GetUserPlaylistsResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/user-playlists"
+            body: "*"
+        };
+    }
+
+    rpc GetPlaylist (GetPlaylistRequest) returns (GetPlaylistResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/playlist"
+            body: "*"
+        };
+    }
 }
 
 message AddUserRequest {
@@ -70,4 +91,48 @@ enum ContentAvailabilityType {
 enum UserRole {
     LISTENER = 0;
     CREATOR = 1;
+}
+
+message CreatePlaylistRequest {
+    string name = 1;
+}
+
+message CreatePlaylistResponse {
+    string playlistID = 1;
+}
+
+message GetPlaylistRequest {
+    string playlistID = 1;
+    string userToken = 2;
+}
+
+message GetPlaylistResponse {
+    string name = 1;
+    string ownerID = 2;
+    uint64 createdAtTimestamp = 3;
+    uint64 updatedAtTimestamp = 4;
+    repeated PlaylistItem playlistItems = 5;
+}
+
+message GetUserPlaylistsRequest {
+
+}
+
+message GetUserPlaylistsResponse {
+    repeated Playlist playlists = 1;
+}
+
+message Playlist {
+    string playlistID = 1;
+    string name = 2;
+    string ownerID = 3;
+    uint64 createdAtTimestamp = 4;
+    uint64 updatedAtTimestamp = 5;
+    repeated PlaylistItem playlistItems = 6;
+}
+
+message PlaylistItem {
+    string playlistItemID = 1;
+    string contentID = 2;
+    uint64 createdAtTimestamp = 3;
 }

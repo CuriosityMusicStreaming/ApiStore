@@ -37,7 +37,14 @@ service PlayListService {
 
     rpc GetPlaylist (GetPlaylistRequest) returns (GetPlaylistResponse) {
         option (google.api.http) = {
-            post: "/api/ps/v1/add-content"
+            post: "/api/ps/v1/playlist"
+            body: "*"
+        };
+    }
+
+    rpc GetUserPlaylists (GetUserPlaylistsRequest) returns (GetUserPlaylistsResponse) {
+        option (google.api.http) = {
+            post: "/api/ps/v1/user-playlists"
             body: "*"
         };
     }
@@ -74,17 +81,36 @@ message RemovePlaylistRequest {
 
 message GetPlaylistRequest {
     string playlistID = 1;
+    string userToken = 2;
 }
 
 message GetPlaylistResponse {
     string name = 1;
-    string authorID = 2;
+    string ownerID = 2;
     uint64 createdAtTimestamp = 3;
     uint64 updatedAtTimestamp = 4;
     repeated PlaylistItem playlistItems = 5;
 }
 
+message GetUserPlaylistsRequest {
+    string userToken = 1;
+}
+
+message GetUserPlaylistsResponse {
+    repeated Playlist playlists = 1;
+}
+
+message Playlist {
+    string playlistID = 1;
+    string name = 2;
+    string ownerID = 3;
+    uint64 createdAtTimestamp = 4;
+    uint64 updatedAtTimestamp = 5;
+    repeated PlaylistItem playlistItems = 6;
+}
+
 message PlaylistItem {
-    string id = 1;
+    string playlistItemID = 1;
     string contentID = 2;
+    uint64 createdAtTimestamp = 3;
 }
