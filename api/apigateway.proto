@@ -47,6 +47,13 @@ service ApiGateway {
             body: "*"
         };
     }
+
+    rpc AddToPlaylist (AddToPlaylistRequest) returns (AddToPlaylistResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/playlist/add"
+            body: "*"
+        };
+    }
 }
 
 message AddUserRequest {
@@ -76,6 +83,15 @@ message AddContentRequest {
 
 message AddContentResponse {
     string contentID = 1;
+}
+
+message AddToPlaylistRequest {
+    string playlistID = 1;
+    string contentID = 2;
+}
+
+message AddToPlaylistResponse {
+    string playlistItemID = 1;
 }
 
 enum ContentType {
