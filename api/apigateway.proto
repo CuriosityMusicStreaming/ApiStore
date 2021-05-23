@@ -29,7 +29,7 @@ service ApiGateway {
 
     rpc GetAuthorContent (GetAuthorContentRequest) returns (GetAuthorContentResponse) {
         option (google.api.http) = {
-            post: "/api/cs/v1/content-list/for-author"
+            post: "/api/v1/content-list/for-author"
             body: "*"
         };
     }
