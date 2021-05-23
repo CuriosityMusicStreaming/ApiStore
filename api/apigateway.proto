@@ -27,6 +27,13 @@ service ApiGateway {
         };
     }
 
+    rpc GetAuthorContent (GetAuthorContentRequest) returns (GetAuthorContentResponse) {
+        option (google.api.http) = {
+            post: "/api/cs/v1/content-list/for-author"
+            body: "*"
+        };
+    }
+
     rpc CreatePlaylist (CreatePlaylistRequest) returns (CreatePlaylistResponse) {
         option (google.api.http) = {
             post: "/api/v1/create-playlist"
@@ -85,6 +92,14 @@ message AddContentResponse {
     string contentID = 1;
 }
 
+message GetAuthorContentRequest {
+    string userToken = 1;
+}
+
+message GetAuthorContentResponse {
+    repeated Content contents = 1;
+}
+
 message AddToPlaylistRequest {
     string playlistID = 1;
     string contentID = 2;
@@ -107,6 +122,14 @@ enum ContentAvailabilityType {
 enum UserRole {
     LISTENER = 0;
     CREATOR = 1;
+}
+
+message Content {
+    string contentID = 1;
+    string name = 2;
+    string authorID = 3;
+    ContentType type = 4;
+    ContentAvailabilityType availabilityType = 5;
 }
 
 message CreatePlaylistRequest {

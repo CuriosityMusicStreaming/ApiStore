@@ -35,6 +35,12 @@ service ContentService {
         };
     }
 
+    rpc GetAuthorContent (GetAuthorContentRequest) returns (GetAuthorContentResponse) {
+        option (google.api.http) = {
+            post: "/api/cs/v1/content-list/for-author"
+            body: "*"
+        };
+    }
 }
 
 message AddContentRequest {
@@ -70,6 +76,14 @@ message GetContentListRequest {
 }
 
 message GetContentListResponse {
+    repeated Content contents = 1;
+}
+
+message GetAuthorContentRequest {
+    string userToken = 1;
+}
+
+message GetAuthorContentResponse {
     repeated Content contents = 1;
 }
 
