@@ -27,6 +27,13 @@ service ApiGateway {
         };
     }
 
+    rpc SetContentAvailabilityType (SetContentAvailabilityTypeRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/api/v1/set-content-availability-type"
+            body: "*"
+        };
+    }
+
     rpc GetAuthorContent (GetAuthorContentRequest) returns (GetAuthorContentResponse) {
         option (google.api.http) = {
             post: "/api/v1/content-list/for-author"
@@ -90,6 +97,12 @@ message AddContentRequest {
 
 message AddContentResponse {
     string contentID = 1;
+}
+
+message SetContentAvailabilityTypeRequest {
+    string contentID = 1;
+    ContentAvailabilityType newContentAvailabilityType = 2;
+    string userToken = 3;
 }
 
 message GetAuthorContentRequest {
