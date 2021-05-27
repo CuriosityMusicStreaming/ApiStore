@@ -72,8 +72,7 @@ service ApiGateway {
 
     rpc RemovePlaylist (RemovePlaylistRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-            delete: "/api/v1/playlist"
-            body: "*"
+            delete: "/api/v1/playlist/{playlistID}"
         };
     }
 }
