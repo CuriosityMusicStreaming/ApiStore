@@ -5,7 +5,7 @@ import "google/api/annotations.proto";
 
 option go_package = ".;authservice";
 
-service AuthenticateService {
+service AuthenticationService {
     rpc AuthenticateUser (AuthenticateUserRequest) returns (AuthenticateUserResponse) {
         option (google.api.http) = {
             post: "/api/us/v1/auth-user"
