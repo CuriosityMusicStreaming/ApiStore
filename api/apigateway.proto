@@ -69,6 +69,13 @@ service ApiGateway {
             body: "*"
         };
     }
+
+    rpc RemovePlaylist (RemovePlaylistRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/playlist"
+            body: "*"
+        };
+    }
 }
 
 message AddUserRequest {
@@ -151,6 +158,10 @@ message CreatePlaylistRequest {
 }
 
 message CreatePlaylistResponse {
+    string playlistID = 1;
+}
+
+message RemovePlaylistRequest {
     string playlistID = 1;
 }
 
