@@ -1,0 +1,30 @@
+syntax = "proto3";
+package authenticationservice;
+
+import "google/api/annotations.proto";
+
+option go_package = ".;authenticationservice";
+
+service AuthenticationService {
+    rpc AuthenticateUser (AuthenticateUserRequest) returns (AuthenticateUserResponse) {
+        option (google.api.http) = {
+          post: "/api/us/v1/auth-user"
+          body: "*"
+        };
+    }
+}
+
+message AuthenticateUserRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message AuthenticateUserResponse {
+    string userID = 1;
+    UserRole role = 2;
+}
+
+enum UserRole {
+    LISTENER = 0;
+    CREATOR = 1;
+}

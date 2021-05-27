@@ -1,0 +1,23 @@
+syntax = "proto3";
+package authorizationservice;
+
+import "google/api/annotations.proto";
+
+option go_package = ".;authorizationservice";
+
+service AuthorizationService {
+    rpc CanAddContent (CanAddContentRequest) returns (CanAddContentResponse) {
+        option (google.api.http) = {
+            post: "/api/us/v1/can-add-content"
+            body: "*"
+        };
+    }
+}
+
+message CanAddContentRequest {
+    string userToken = 1;
+}
+
+message CanAddContentResponse {
+    bool canAdd = 1;
+}
