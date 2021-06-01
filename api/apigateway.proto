@@ -9,57 +9,54 @@ option go_package = ".;apigateway";
 service ApiGateway {
     rpc AuthenticateUser (AuthenticateUserRequest) returns (AuthenticateUserResponse) {
         option (google.api.http) = {
-            post: "/api/v1/auth-user"
+            post: "/api/v1/user/auth"
             body: "*"
         };
     }
 
     rpc AddUser (AddUserRequest) returns (AddUserResponse) {
         option (google.api.http) = {
-            post: "/api/v1/add-user"
+            post: "/api/v1/user"
             body: "*"
         };
     }
 
     rpc AddContent (AddContentRequest) returns (AddContentResponse) {
         option (google.api.http) = {
-            post: "/api/v1/add-content"
+            post: "/api/v1/content"
             body: "*"
         };
     }
 
     rpc SetContentAvailabilityType (SetContentAvailabilityTypeRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-            post: "/api/v1/set-content-availability-type"
+            post: "/api/v1/content/availability-type"
             body: "*"
         };
     }
 
     rpc GetAuthorContent (GetAuthorContentRequest) returns (GetAuthorContentResponse) {
         option (google.api.http) = {
-            post: "/api/v1/content-list/for-author"
-            body: "*"
+            get: "/api/v1/content/author"
         };
     }
 
     rpc CreatePlaylist (CreatePlaylistRequest) returns (CreatePlaylistResponse) {
         option (google.api.http) = {
-            post: "/api/v1/create-playlist"
+            post: "/api/v1/playlist/create"
             body: "*"
         };
     }
 
     rpc GetUserPlaylists (GetUserPlaylistsRequest) returns (GetUserPlaylistsResponse) {
         option (google.api.http) = {
-            post: "/api/v1/user-playlists"
-            body: "*"
+            get: "/api/v1/playlist/list"
         };
     }
 
     rpc GetPlaylist (GetPlaylistRequest) returns (GetPlaylistResponse) {
         option (google.api.http) = {
-            post: "/api/v1/playlist"
-            body: "*"
+            get: "/api/v1/playlist/{playlistID}"
         };
     }
 
@@ -115,11 +112,9 @@ message AddContentResponse {
 message SetContentAvailabilityTypeRequest {
     string contentID = 1;
     ContentAvailabilityType newContentAvailabilityType = 2;
-    string userToken = 3;
 }
 
 message GetAuthorContentRequest {
-    string userToken = 1;
 }
 
 message GetAuthorContentResponse {
@@ -176,7 +171,6 @@ message RemoveFromPlaylistRequest {
 
 message GetPlaylistRequest {
     string playlistID = 1;
-    string userToken = 2;
 }
 
 message GetPlaylistResponse {

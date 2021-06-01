@@ -9,43 +9,39 @@ option go_package = ".;playlistservice";
 service PlayListService {
     rpc CreatePlaylist (CreatePlaylistRequest) returns (CreatePlaylistResponse) {
         option (google.api.http) = {
-            post: "/api/ps/v1/create-playlist"
-            body: "*"
-        };
-    }
-
-    rpc AddToPlaylist (AddToPlaylistRequest) returns (AddToPlaylistResponse) {
-        option (google.api.http) = {
-            post: "/api/ps/v1/add-content-to-playlist"
-            body: "*"
-        };
-    }
-
-    rpc RemoveFromPlaylist (RemoveFromPlaylistRequest) returns (google.protobuf.Empty) {
-        option (google.api.http) = {
-            post: "/api/ps/v1/remove-from-playlist"
-            body: "*"
-        };
-    }
-
-    rpc RemovePlaylist (RemovePlaylistRequest) returns (google.protobuf.Empty) {
-        option (google.api.http) = {
-            post: "/api/ps/v1/remove-playlist"
-            body: "*"
-        };
-    }
-
-    rpc GetPlaylist (GetPlaylistRequest) returns (GetPlaylistResponse) {
-        option (google.api.http) = {
-            post: "/api/ps/v1/playlist"
+            post: "/api/v1/playlist/create"
             body: "*"
         };
     }
 
     rpc GetUserPlaylists (GetUserPlaylistsRequest) returns (GetUserPlaylistsResponse) {
         option (google.api.http) = {
-            post: "/api/ps/v1/user-playlists"
+            get: "/api/v1/playlist/list"
+        };
+    }
+
+    rpc GetPlaylist (GetPlaylistRequest) returns (GetPlaylistResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/playlist/{playlistID}"
+        };
+    }
+
+    rpc AddToPlaylist (AddToPlaylistRequest) returns (AddToPlaylistResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/playlist/add"
             body: "*"
+        };
+    }
+
+    rpc RemovePlaylist (RemovePlaylistRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/playlist/{playlistID}"
+        };
+    }
+
+    rpc RemoveFromPlaylist (RemoveFromPlaylistRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/playlist/item/{playlistItemID}"
         };
     }
 }

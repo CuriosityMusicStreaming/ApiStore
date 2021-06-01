@@ -8,7 +8,7 @@ option go_package = ".;authenticationservice";
 service AuthenticationService {
     rpc AuthenticateUser (AuthenticateUserRequest) returns (AuthenticateUserResponse) {
         option (google.api.http) = {
-          post: "/api/us/v1/auth-user"
+          post: "/api/v1/auth/user"
           body: "*"
         };
     }

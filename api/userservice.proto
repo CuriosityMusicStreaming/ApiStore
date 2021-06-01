@@ -8,7 +8,7 @@ option go_package = ".;userservice";
 service UserService {
     rpc AddUser (AddUserRequest) returns (AddUserResponse) {
         option (google.api.http) = {
-            post: "/api/us/v1/add-user"
+            post: "/api/v1/user"
             body: "*"
         };
     }

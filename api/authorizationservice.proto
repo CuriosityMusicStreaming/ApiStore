@@ -8,7 +8,7 @@ option go_package = ".;authorizationservice";
 service AuthorizationService {
     rpc CanAddContent (CanAddContentRequest) returns (CanAddContentResponse) {
         option (google.api.http) = {
-            post: "/api/us/v1/can-add-content"
+            post: "/api/auth/can-add-content"
             body: "*"
         };
     }
