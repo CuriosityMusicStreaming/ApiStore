@@ -28,6 +28,12 @@ service ApiGateway {
         };
     }
 
+    rpc DeleteContent (DeleteContentRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/content/{contentID}"
+        };
+    }
+
     rpc SetContentAvailabilityType (SetContentAvailabilityTypeRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/api/v1/set-content-availability-type"
@@ -109,6 +115,10 @@ message AddContentRequest {
 }
 
 message AddContentResponse {
+    string contentID = 1;
+}
+
+message DeleteContentRequest {
     string contentID = 1;
 }
 
