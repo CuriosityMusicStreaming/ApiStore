@@ -69,6 +69,13 @@ service ApiGateway {
         };
     }
 
+    rpc SetPlaylistName (SetPlaylistNameRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/api/v1/playlist/name"
+            body: "*"
+        };
+    }
+
     rpc AddToPlaylist (AddToPlaylistRequest) returns (AddToPlaylistResponse) {
         option (google.api.http) = {
             post: "/api/v1/playlist/add"
@@ -134,6 +141,12 @@ message GetAuthorContentRequest {
 
 message GetAuthorContentResponse {
     repeated Content contents = 1;
+}
+
+message SetPlaylistNameRequest {
+    string playlistID = 1;
+    string newName = 2;
+    string userToken = 3;
 }
 
 message AddToPlaylistRequest {
