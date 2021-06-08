@@ -28,6 +28,12 @@ service ApiGateway {
         };
     }
 
+    rpc DeleteContent (DeleteContentRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/content/{contentID}"
+        };
+    }
+
     rpc SetContentAvailabilityType (SetContentAvailabilityTypeRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/api/v1/content/availability-type"
@@ -57,6 +63,13 @@ service ApiGateway {
     rpc GetPlaylist (GetPlaylistRequest) returns (GetPlaylistResponse) {
         option (google.api.http) = {
             get: "/api/v1/playlist/{playlistID}"
+        };
+    }
+
+    rpc SetPlaylistName (SetPlaylistNameRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/api/v1/playlist/name"
+            body: "*"
         };
     }
 
@@ -109,6 +122,10 @@ message AddContentResponse {
     string contentID = 1;
 }
 
+message DeleteContentRequest {
+    string contentID = 1;
+}
+
 message SetContentAvailabilityTypeRequest {
     string contentID = 1;
     ContentAvailabilityType newContentAvailabilityType = 2;
@@ -119,6 +136,11 @@ message GetAuthorContentRequest {
 
 message GetAuthorContentResponse {
     repeated Content contents = 1;
+}
+
+message SetPlaylistNameRequest {
+    string playlistID = 1;
+    string newName = 2;
 }
 
 message AddToPlaylistRequest {

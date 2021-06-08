@@ -7,7 +7,7 @@ import "google/protobuf/empty.proto";
 option go_package = ".;contentservice";
 
 service ContentService {
-    rpc AddContent (AddContentRequest) returns (google.protobuf.Empty) {
+    rpc AddContent (AddContentRequest) returns (AddContentResponse) {
     }
 
     rpc DeleteContent (DeleteContentRequest) returns (google.protobuf.Empty) {
@@ -28,6 +28,10 @@ message AddContentRequest {
     ContentType type = 2;
     ContentAvailabilityType availabilityType = 3;
     string userToken = 4;
+}
+
+message AddContentResponse {
+    string contentID = 1;
 }
 
 enum ContentType {
