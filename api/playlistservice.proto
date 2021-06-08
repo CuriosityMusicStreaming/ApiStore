@@ -35,6 +35,13 @@ service PlayListService {
         };
     }
 
+    rpc SetPlaylistName (SetPlaylistNameRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/api/v1/playlist/name"
+            body: "*"
+        };
+    }
+
     rpc GetPlaylist (GetPlaylistRequest) returns (GetPlaylistResponse) {
         option (google.api.http) = {
             post: "/api/ps/v1/playlist"
@@ -77,6 +84,12 @@ message RemoveFromPlaylistRequest {
 message RemovePlaylistRequest {
     string playlistID = 1;
     string userToken = 2;
+}
+
+message SetPlaylistNameRequest {
+    string playlistID = 1;
+    string newName = 2;
+    string userToken = 3;
 }
 
 message GetPlaylistRequest {
