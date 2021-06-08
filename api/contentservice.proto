@@ -8,18 +8,35 @@ option go_package = ".;contentservice";
 
 service ContentService {
     rpc AddContent (AddContentRequest) returns (AddContentResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/content"
+            body: "*"
+        };
     }
 
     rpc DeleteContent (DeleteContentRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/content/{contentID}"
+        };
     }
 
     rpc SetContentAvailabilityType (SetContentAvailabilityTypeRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/api/v1/content/availability-type"
+            body: "*"
+        };
     }
 
     rpc GetContentList (GetContentListRequest) returns (GetContentListResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/content/list"
+        };
     }
 
     rpc GetAuthorContent (GetAuthorContentRequest) returns (GetAuthorContentResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/content/author"
+        };
     }
 }
 
