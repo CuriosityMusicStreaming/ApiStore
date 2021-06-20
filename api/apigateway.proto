@@ -6,7 +6,7 @@ import "google/protobuf/empty.proto";
 
 option go_package = ".;apigateway";
 
-service ApiGateway {
+service APIGateway {
     rpc AuthenticateUser (AuthenticateUserRequest) returns (AuthenticateUserResponse) {
         option (google.api.http) = {
             post: "/api/v1/user/auth"
